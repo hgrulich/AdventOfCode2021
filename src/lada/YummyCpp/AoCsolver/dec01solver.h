@@ -15,6 +15,7 @@ class Dec01Solver : public GenericSolver
 {
 private:
     std::vector<int> data_frame;
+    int count_positive_increments(const std::vector<int> &vec);
 public:
     Dec01Solver();
     void read_input_data();
