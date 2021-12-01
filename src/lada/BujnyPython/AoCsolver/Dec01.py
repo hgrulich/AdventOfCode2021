@@ -10,4 +10,6 @@ class Solver:
         return increases.sum().values[0]
 
     def solve_part2(self):
-        pass
+        window_size = 3
+        increases = self.df.rolling(window_size).sum().diff() > 0
+        return increases.sum().values[0]
