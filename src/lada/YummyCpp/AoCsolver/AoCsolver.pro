@@ -5,7 +5,10 @@ CONFIG -= qt
 
 SOURCES += \
         dec01solver.cpp \
+        dec02solver.cpp \
         main.cpp
 
 HEADERS += \
-    dec01solver.h
+    dec01solver.h \
+    dec02solver.h \
+    genericsolver.h
