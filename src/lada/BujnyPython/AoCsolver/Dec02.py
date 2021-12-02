@@ -54,15 +54,13 @@ class Solver:
 
     def _solve(self, cmd_processor):
         self.df.apply(cmd_processor.compute_aim_pos, axis=1)
+        return cmd_processor.horizontal * cmd_processor.depth
 
     def solve_part1(self):
         cmd_proc = SubmarineCmdProcessorPart1()
-        self._solve(cmd_proc)
-
-        return cmd_proc.horizontal * cmd_proc.depth
+        return self._solve(cmd_proc)
 
     def solve_part2(self):
         cmd_proc = SubmarineCmdProcessorPart2()
-        self._solve(cmd_proc)
+        return self._solve(cmd_proc)
 
-        return cmd_proc.horizontal * cmd_proc.depth
