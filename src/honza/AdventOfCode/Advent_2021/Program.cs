@@ -1,11 +1,15 @@
 ﻿using Advent_2021;
+using System.Diagnostics;
 
 //var day = new Day01();
 //var day = new Day02();
 //var day = new Day03();
 //var day = new Day04();
-var day = new Day05();
-
+//var day = new Day05();
+var day = new Day06();
+var sw = Stopwatch.StartNew();
 Console.WriteLine($"First puzzle: {day.SolveFirst()}");
-
+Console.WriteLine($"Elapsed: {sw.ElapsedMilliseconds} ms");
+sw.Restart();
 Console.WriteLine($"Second puzzle: {day.SolveSecond()}");
+Console.WriteLine($"Elapsed: {sw.ElapsedMilliseconds} ms");
