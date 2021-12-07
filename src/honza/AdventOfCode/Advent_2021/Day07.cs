@@ -10,13 +10,11 @@ namespace Advent_2021
     {
         public int SolveFirst()
         {
-            var positions = File.ReadAllLines(Path.Combine("Input", "Day07.txt"))[0].Split(',').Select(int.Parse);
             return this.Solve((crabPos, targetPos) => Math.Abs(crabPos - targetPos));
         }
 
         public int SolveSecond()
         {
-            var positions = File.ReadAllLines(Path.Combine("Input", "Day07.txt"))[0].Split(',').Select(int.Parse);
             return this.Solve((crabPos, targetPos) => MakeIntSum(Math.Abs(crabPos - targetPos)));
         }
 
@@ -25,7 +23,6 @@ namespace Advent_2021
             var positions = File.ReadAllLines(Path.Combine("Input", "Day07.txt"))[0].Split(',').Select(int.Parse);
             var min = positions.Min();
             var max = positions.Max();
-            var minSum = int.MaxValue;
             return Enumerable.Range(min, max).Select(i => positions.Select(x => fuelMapping(x, i)).Sum()).Min();
         }
 
