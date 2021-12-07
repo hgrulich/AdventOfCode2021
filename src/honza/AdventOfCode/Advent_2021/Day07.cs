@@ -21,9 +21,10 @@ namespace Advent_2021
         int Solve(Func<int, int, int> fuelMapping)
         {
             var positions = File.ReadAllLines(Path.Combine("Input", "Day07.txt"))[0].Split(',').Select(int.Parse);
-            var min = positions.Min();
-            var max = positions.Max();
-            return Enumerable.Range(min, max).Select(i => positions.Select(x => fuelMapping(x, i)).Sum()).Min();
+            return Enumerable
+                .Range(positions.Min(), positions.Max())
+                .Select(i => positions.Select(x => fuelMapping(x, i)).Sum())
+                .Min();
         }
 
         int MakeIntSum(int value) => (value + 1) * value / 2;
