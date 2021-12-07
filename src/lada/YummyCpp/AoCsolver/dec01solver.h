@@ -2,13 +2,7 @@
 #define DEC01SOLVER_H
 
 #include <vector>
-
-class GenericSolver
-{
-public:
-    virtual int solve_part1() = 0;
-    virtual int solve_part2() = 0;
-};
+#include "genericsolver.h"
 
 
 class Dec01Solver : public GenericSolver
@@ -18,7 +12,7 @@ private:
     int count_positive_increments(const std::vector<int> &vec);
 public:
     Dec01Solver();
-    void read_input_data();
+    void read_input_data() override;
     int solve_part1() override;
     int solve_part2() override;
 };

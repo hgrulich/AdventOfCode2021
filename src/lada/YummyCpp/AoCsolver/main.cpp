@@ -1,11 +1,11 @@
 #include <iostream>
-#include "dec01solver.h"
+#include "dec02solver.h"
 
 using namespace std;
 
 int main()
 {
-    Dec01Solver Solver;
+    Dec02Solver Solver;
 
     Solver.read_input_data();
 
