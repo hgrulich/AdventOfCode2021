@@ -7,7 +7,8 @@ using System.Diagnostics;
 //var day = new Day04();
 //var day = new Day05();
 //var day = new Day06();
-var day = new Day07();
+//var day = new Day07();
+var day = new Day08();
 
 var sw = Stopwatch.StartNew();
 Console.WriteLine($"First puzzle: {day.SolveFirst()}");
