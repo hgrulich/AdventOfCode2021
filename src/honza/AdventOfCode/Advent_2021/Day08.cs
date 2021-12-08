@@ -28,18 +28,19 @@ internal class Day08
         var seven = signal.Pattern.First(x => x.Length == 3);
         var four = signal.Pattern.First(x => x.Length == 4);
         var eight = signal.Pattern.First(x => x.Length == 7);
-        segments[0] = seven.Values.First(x => !one.Values.Contains(x));
-        segments[3] = eight.Values.First(x => !four.Values.Contains(x));
-        segments[1] = four.Values.First(x => !one.Values.Contains(x) && x != segments[3]);
-        var fiveKnownSegments = new char[] { segments[0], segments[1], segments[3] };
-        var five = signal.Pattern.First(x => x.Length == 5 && fiveKnownSegments.All(s => x.Values.Contains(s)));
-        segments[5] = five.Values.First(x => !fiveKnownSegments.Contains(x) && !one.Values.Contains(x));
-        segments[2] = one.Values.First(x => x != segments[5]);
-        segments[6] = five.Values.First(x => !new char[] { segments[0], segments[1], segments[3], segments[5] }.Contains(x));
-
+        segments[0] = seven.First(x => !one.Contains(x));
+        var six = signal.Pattern.First(x => x.Length == 6 && one.Count(o => x.Contains(o)) == 1);
+        segments[2] = one.First(x => !six.Contains(x));
+        segments[5] = one.First(x => x != segments[2]);
+        var five = signal.Pattern.First(x => x.Length == 5 && four.Where(f => !one.Contains(f)).All(f => x.Contains(f)) && x.Contains(segments[0]));
+        segments[6] = five.First(x => !four.Contains(x) && x != segments[0]);
+        var threeKnown = new char[] { segments[0], segments[2], segments[5], segments[6] };
+        var three = signal.Pattern.First(x => x.Length == 5 && threeKnown.All(t => x.Contains(t)));
+        segments[3] = three.First(x => !threeKnown.Contains(x));
+        var fourKnown = new char[] { segments[2], segments[3], segments[5]};
+        segments[1] = four.First(x => !fourKnown.Contains(x));
         segments[4] = "abcdefg".First(x => !segments.Contains(x));
 
-        var result = new char[4];
 
         var patterns = new char[][]
         {
@@ -55,7 +56,7 @@ internal class Day08
             new char[]{ segments[0], segments[1], segments[2], segments[3], segments[5] },
         };
 
-        return int.Parse(new string(signal.Output.Select(x => GetNumber(x.Values, patterns)).ToArray()));
+        return int.Parse(new string(signal.Output.Select(x => GetNumber(x, patterns)).ToArray()));
     }
 
     char GetNumber(string s, char[][] patterns)
@@ -63,7 +64,7 @@ internal class Day08
         if (s.Length == 6 && patterns[0].All(x => s.Contains(x))) return '0';
         if (s.Length == 2 && patterns[1].All(x => s.Contains(x))) return '1';
         if (s.Length == 5 && patterns[2].All(x => s.Contains(x))) return '2';
-        if (s.Length == 4 && patterns[3].All(x => s.Contains(x))) return '3';
+        if (s.Length == 5 && patterns[3].All(x => s.Contains(x))) return '3';
         if (s.Length == 4 && patterns[4].All(x => s.Contains(x))) return '4';
         if (s.Length == 5 && patterns[5].All(x => s.Contains(x))) return '5';
         if (s.Length == 6 && patterns[6].All(x => s.Contains(x))) return '6';
@@ -76,24 +77,14 @@ internal class Day08
 
 class Signal
 {
-    public IEnumerable<Segment> Pattern { get; private set; }
-    public IEnumerable<Segment> Output { get; private set; }
+    public IEnumerable<string> Pattern { get; private set; }
+    public IEnumerable<string> Output { get; private set; }
 
     public Signal(string input)
     {
         var parts = input.Split('|');
-        this.Pattern = parts[0].Split(' ', StringSplitOptions.RemoveEmptyEntries).Select(x => new Segment(x));
-        this.Output = parts[1].Split(' ', StringSplitOptions.RemoveEmptyEntries).Select(x => new Segment(x));
+        this.Pattern = parts[0].Split(' ', StringSplitOptions.RemoveEmptyEntries);
+        this.Output = parts[1].Split(' ', StringSplitOptions.RemoveEmptyEntries);
     }
 }
 
-class Segment
-{
-    public int Length { get; }
-    public string Values { get; }
-    public Segment(string input)
-    {
-        this.Length = input.Length;
-        this.Values = input;
-    }
-}
