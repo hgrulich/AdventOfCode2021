@@ -12,7 +12,8 @@ using System.Diagnostics;
 //var day = new Day09();
 //var day = new Day10();
 //var day = new Day11();
-var day = new Day12();
+//var day = new Day12();
+var day = new Day13();
 
 var sw = Stopwatch.StartNew();
 Console.WriteLine($"First puzzle: {day.SolveFirst()}");
