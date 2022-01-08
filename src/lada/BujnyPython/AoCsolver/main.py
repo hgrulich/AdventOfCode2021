@@ -1,4 +1,4 @@
-from Dec04 import Solver
+from Dec08 import Solver
 
 if __name__ == '__main__':
     DailyPuzzleSolver = Solver()
