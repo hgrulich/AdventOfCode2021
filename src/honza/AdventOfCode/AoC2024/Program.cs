@@ -1,3 +1,6 @@
-﻿using AoC2024;
+﻿using System.Diagnostics;
+using AoC2024;
 
-Console.WriteLine(new Day05().Solve2());
+var sw = Stopwatch.StartNew();
+Console.WriteLine(new Day06().Solve2());
+Console.WriteLine(sw.ElapsedMilliseconds);
